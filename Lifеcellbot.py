@@ -13,6 +13,18 @@ main_menu_buttons = [
     KeyboardButton('Помощ')
 ]
 
+tariff_buttons = [
+    KeyboardButton('Вільний Лайф'),
+    KeyboardButton('Смарт Лайф'),
+    KeyboardButton('Просто Лайф'),
+    KeyboardButton('Platinum Лайф'),
+    KeyboardButton('Шкільний Лайф'),
+    KeyboardButton('Шкільний Лайф'),
+    KeyboardButton('Ґаджет'),
+    KeyboardButton('Смарт Сімя'),
+    KeyboardButton('Назад')
+]
+
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
@@ -23,6 +35,13 @@ async def start(message: types.Message):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add(*main_menu_buttons)
     await message.answer('Виберіть пункт:', reply_markup=keyboard)
+
+
+@dp.message_handler(text='Тариф')
+async def show_tariffs(message: types.Message):
+    keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add(*tariff_buttons)
+    await message.answer('Виберіть тариф:', reply_markup=keyboard)
 
 
 @dp.message_handler(text='Назад')
