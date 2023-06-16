@@ -1,1 +1,14 @@
+from aiogram import Dispatcher, Bot, types, executor
+import logging
 
+bot = Bot("5621180512:AAHVrYKXtjyX0grli6IUs4G3hCA9uALf0Pk")
+dp = Dispatcher(bot)
+
+logging.basicConfig(level=logging.INFO)
+
+@dp.message_handler()
+async def echo(message: types.Message):
+    await message.answer(message.text)
+
+
+executor.start_polling(dp, skip_updates=True)
