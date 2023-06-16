@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.INFO)
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
-    user_tag = f"<b>{message.from_user.username}</b>"
+    user_tag = f"<b>{message.from_user.full_name}</b>"
     await message.answer(f"Привіт, {user_tag}! Я бот від Lifеcellbot тут ви можете оплати тариф і тд ",
                          parse_mode='HTML')
 
