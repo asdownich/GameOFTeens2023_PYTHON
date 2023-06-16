@@ -1,7 +1,7 @@
 from aiogram import Dispatcher, Bot, types, executor
 import logging
 
-bot = Bot("5621180512:AAHVrYKXtjyX0grli6IUs4G3hCA9uALf0Pk")
+bot = Bot("6056717794:AAE8KjnkQXAQkDrXScqfUVX6Vmi4q1hP9mo")
 dp = Dispatcher(bot)
 
 logging.basicConfig(level=logging.INFO)
