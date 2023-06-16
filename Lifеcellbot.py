@@ -8,9 +8,17 @@ logging.basicConfig(level=logging.INFO)
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
-    user_tag = f"<b>{message.from_user.full_name}</b>"
-    await message.answer(f"Привіт, {user_tag}! Я бот від Lifеcellbot тут ви можете обрати найбільш піходящий для вас тариф.",
+    user_tag = f"<b>{message.from_user.username}</b>"
+    await message.answer(f"Привіт, {user_tag}! Я бот від Lifеcellbot тут ви можете оплати тариф і тд ",
                          parse_mode='HTML')
+
+    keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add(KeyboardButton('Тариф 1'))
+    keyboard.add(KeyboardButton('Тариф 2'))
+    keyboard.add(KeyboardButton('Тариф 3'))
+    keyboard.add(KeyboardButton('Тариф 4'))
+    keyboard.add(KeyboardButton('Тариф 5'))
+    await message.answer('Виберіть тариф:', reply_markup=keyboard)
 
 
 if __name__ == '__main__':
