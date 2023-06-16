@@ -14,9 +14,9 @@ async def start(message: types.Message):
                          parse_mode='HTML')
 
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add(KeyboardButton('Меню'))
-    keyboard.add(KeyboardButton('Тариф'))
-    keyboard.add(KeyboardButton('Допомога'))
+    keyboard.add(KeyboardButton('Список тарифів.'))
+    keyboard.add(KeyboardButton('Конструктор Тарифу.'))
+    keyboard.add(KeyboardButton('Звернутися у підтримку.'))
     await message.answer('Виберіть пункт:', reply_markup=keyboard)
 
 
