@@ -16,7 +16,7 @@ async def start(message: types.Message):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add(KeyboardButton('Меню'))
     keyboard.add(KeyboardButton('Тариф'))
-    keyboard.add(KeyboardButton('Помощ'))
+    keyboard.add(KeyboardButton('Допомога'))
     await message.answer('Виберіть пункт:', reply_markup=keyboard)
 
 
