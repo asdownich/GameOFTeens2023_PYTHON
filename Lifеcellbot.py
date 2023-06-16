@@ -43,43 +43,32 @@ tariff_descriptions = {
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
-    user_tag = f"<b>{message.from_user.username}</b>"
+    user_tag = f"<b>{message.from_user.full_name}</b>"
     await message.answer(f"Привіт, {user_tag}! Я бот від Lifеcellbot тут ви можете оплатити тариф і тд ",
                          parse_mode='HTML')
 
-    keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add(*main_menu_buttons)
+    keyboard = ReplyKeyboardMarkup(resize_keyboard=True).add(*main_menu_buttons)
     await message.answer('Виберіть пункт:', reply_markup=keyboard)
 
+@dp.message_handler(content_types=['text'])
+async def text(message: types.Message):
+    msg = message.text
 
-@dp.message_handler(text='Обрати Тариф')
-async def show_tariffs(message: types.Message):
-    keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add(*tariff_buttons)
-    await message.answer('Виберіть тариф:', reply_markup=keyboard)
+    if msg == 'Обрати Тариф':
+        keyboard = ReplyKeyboardMarkup(resize_keyboard=True).add(*tariff_buttons)
+        await message.answer('Виберіть тариф:', reply_markup=keyboard)
 
+    elif msg in tariff_descriptions.keys():
+        await message.answer(f'{msg}: {tariff_descriptions.get(msg)}')
 
-@dp.message_handler(text=[tariff for tariff in tariff_descriptions.keys()])
-async def show_tariff_description(message: types.Message):
-    tariff = message.text
-    description = tariff_descriptions.get(tariff)
-    await message.answer(f'{tariff}: {description}')
+    elif msg == 'Допомога':
+        url = 'https://www.lifecell.ua/uk/pidtrimka/'
+        keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton('Перейти до підтримки', url=url))
+        await message.answer('Якщо вам потрібна додаткова допомога, перейдіть за посиланням нижче:', reply_markup=keyboard)
 
-
-@dp.message_handler(text='Допомога')
-async def help(message: types.Message):
-    url = 'https://www.lifecell.ua/uk/pidtrimka/'
-    keyboard = InlineKeyboardMarkup()
-    keyboard.add(InlineKeyboardButton('Перейти до підтримки', url=url))
-    await message.answer('Якщо вам потрібна додаткова допомога, перейдіть за посиланням нижче:', reply_markup=keyboard)
-
-
-@dp.message_handler(text='Назад')
-async def go_back(message: types.Message):
-    keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.add(*main_menu_buttons)
-    await message.answer('Виберіть пункт:', reply_markup=keyboard)
-
+    elif msg == 'Назад':
+        keyboard = ReplyKeyboardMarkup(resize_keyboard=True).add(*main_menu_buttons)
+        await message.answer('Виберіть пункт:', reply_markup=keyboard)
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
