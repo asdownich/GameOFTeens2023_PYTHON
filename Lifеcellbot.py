@@ -25,6 +25,16 @@ tariff_buttons = [
     KeyboardButton('Назад')
 ]
 
+tariff_descriptions = {
+    'Вільний Лайф': 'Опис Вільний Лайф',
+    'Смарт Лайф': 'Опис Смарт Лайф',
+    'Просто Лайф': 'Опис Просто Лайф',
+    'Platinum Лайф': 'Опис Platinum Лайф',
+    'Шкільний Лайф': 'Опис Шкільний Лайф',
+    'Ґаджет': 'Опис Ґаджет',
+    'Смарт Сімя': 'Опис Смарт Сімя'
+}
+
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
@@ -42,6 +52,13 @@ async def show_tariffs(message: types.Message):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add(*tariff_buttons)
     await message.answer('Виберіть тариф:', reply_markup=keyboard)
+
+
+@dp.message_handler(text=[tariff for tariff in tariff_descriptions.keys()])
+async def show_tariff_description(message: types.Message):
+    tariff = message.text
+    description = tariff_descriptions.get(tariff)
+    await message.answer(f'{tariff}: {description}')
 
 
 @dp.message_handler(text='Назад')
