@@ -1,4 +1,4 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram import Dispatcher, Bot, types, executor
 import logging
 
@@ -8,7 +8,6 @@ dp = Dispatcher(bot)
 logging.basicConfig(level=logging.INFO)
 
 main_menu_buttons = [
-    KeyboardButton('Меню'),
     KeyboardButton('Тариф'),
     KeyboardButton('Помощ')
 ]
@@ -59,6 +58,14 @@ async def show_tariff_description(message: types.Message):
     tariff = message.text
     description = tariff_descriptions.get(tariff)
     await message.answer(f'{tariff}: {description}')
+
+
+@dp.message_handler(text='Помощ')
+async def help(message: types.Message):
+    url = 'https://www.lifecell.ua/uk/pidtrimka/'
+    keyboard = InlineKeyboardMarkup()
+    keyboard.add(InlineKeyboardButton('Перейти до підтримки', url=url))
+    await message.answer('Якщо вам потрібна додаткова допомога, перейдіть за посиланням нижче:', reply_markup=keyboard)
 
 
 @dp.message_handler(text='Назад')
