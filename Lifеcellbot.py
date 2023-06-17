@@ -27,7 +27,7 @@ tariff_buttons = [
     KeyboardButton('Platinum Лайф'),
     KeyboardButton('Шкільний Лайф'),
     KeyboardButton('Ґаджет'),
-    KeyboardButton('Смарт Сімя'),
+    KeyboardButton('Смарт Сім\'я'),
     KeyboardButton('Назад')
 ]
 
@@ -107,7 +107,7 @@ async def text(message: types.Message):
     elif msg in gadjet_descriptions.keys():
         await message.answer(f'{msg}: {gadjet_descriptions.get(msg)}')
 
-    elif msg == 'Смарт сім\'я':
+    elif msg == 'Смарт Сім\'я':
         keyboard = ReplyKeyboardMarkup(resize_keyboard=True).add(*family_buttons)
         await message.answer('Виберіть тип тарифу:', reply_markup=keyboard)
 
