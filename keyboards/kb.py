@@ -50,7 +50,8 @@ video_kb = InlineKeyboardMarkup().add(InlineKeyboardButton('Відосик', url
 
 internet_calls_buttons = [
     KeyboardButton('Інтернет'),
-    KeyboardButton('Хв на дзвінки')
+    KeyboardButton('Хв на дзвінки'),
+    KeyboardButton('🔙Назад')
 ]
 internet_calls_kb = ReplyKeyboardMarkup(resize_keyboard=True).add(*internet_calls_buttons)
 

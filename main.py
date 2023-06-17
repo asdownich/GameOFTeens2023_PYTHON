@@ -1,8 +1,6 @@
-from aiogram import Dispatcher, Bot, types, executor
+from aiogram import Dispatcher, Bot, executor
 import logging
 import config
-
-from keyboards import kb
 
 from handlers.command import command
 from handlers.text import text
@@ -19,4 +17,3 @@ def __register_handlers(dp) -> None:
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True, on_startup=__register_handlers(dp))
-    
