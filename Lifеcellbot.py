@@ -14,11 +14,6 @@ dp = Dispatcher(BOT_TOKEN)
 
 logging.basicConfig(level=logging.INFO)
 
-custom_tarif_buttons = [
-    KeyboardButton('Безліміт на лайфсел'),
-    KeyboardButton('Дзвінки на всі мережі'),
-]
-
 main_menu_buttons = [
     KeyboardButton('Обрати Тариф'),
     KeyboardButton('Створити свій тариф'),
@@ -40,13 +35,15 @@ gadjet_buttons = [
     KeyboardButton('Ґаджет Безпека'),
     KeyboardButton('Ґаджет Смарт'),
     KeyboardButton('Ґаджет Планшет'),
-    KeyboardButton('Ґаджет Роутер')
+    KeyboardButton('Ґаджет Роутер'),
+    KeyboardButton('Назад')
 ]
 
 family_buttons = [
     KeyboardButton('Смарт Сім\'я S'),
     KeyboardButton('Смарт Сім\'я M'),
     KeyboardButton('Смарт Сім\'я L'),
+    KeyboardButton('Назад')
 ]
 
 tariff_descriptions = {
