@@ -18,6 +18,7 @@ async def text_f(message: types.Message):
                     ans = f'{tariff}{d}'
                     await message.answer(ans, reply_markup=data['keyboard'])
         if msg in kb.calls:
+            
             if 'calls' in data:
                 if data['calls'] == msg:
                     d = data['info']
