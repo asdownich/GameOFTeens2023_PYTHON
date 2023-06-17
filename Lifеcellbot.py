@@ -16,8 +16,9 @@ logging.basicConfig(level=logging.INFO)
 main_menu_buttons = [
     KeyboardButton('Обрати Тариф'),
     KeyboardButton('Створити свій тариф'),
-    KeyboardButton('Допомога')
-    KeyboardButton('Розробники')
+    KeyboardButton('Допомога'),
+    KeyboardButton('Розробники'),
+    Keyboardbutton('Патріотики')
 ]
 
 tariff_buttons = [
@@ -70,6 +71,12 @@ async def text(message: types.Message):
     elif msg == 'Назад':
         keyboard = ReplyKeyboardMarkup(resize_keyboard=True).add(*main_menu_buttons)
         await message.answer('Виберіть пункт:', reply_markup=keyboard)
+
+    elif msg == 'Патріотики':
+        url='https://www.youtube.com/watch?v=noAUBPrNBxY'
+        keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton('Відосик', url=url))
+        await message.answer('Відосик з низу:', reply_markup=keyboard)
+
 
 @dp.message_handler(lambda message: message.text == 'Розробники')
 async def handle_developers(message: types.Message):
