@@ -14,6 +14,11 @@ dp = Dispatcher(BOT_TOKEN)
 
 logging.basicConfig(level=logging.INFO)
 
+custom_tarif_buttons = [
+    KeyboardButton('Безліміт на лайфсел'),
+    KeyboardButton('Дзвінки на всі мережі'),
+]
+
 main_menu_buttons = [
     KeyboardButton('Обрати Тариф'),
     KeyboardButton('Створити свій тариф'),
@@ -114,5 +119,8 @@ async def text(message: types.Message):
     elif msg in family_descriptions.keys():
         await message.answer(f'{msg}: {family_descriptions.get(msg)}')
 
+    elif msg == 'Створити свій тариф':
+        keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton('Перейти до конструктора', url='https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/handmade/'))
+        await message.answer('Ось посилання на наш сайт де ви зможете зробити власний, унікальний тариф:', reply_markup=keyboard)
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
