@@ -4,21 +4,22 @@
 #проверка, при необходимости доработка
 #запись екрана с работой бота
 #собрать всё в файл на гитхабе и мы полностью готовы
-#імпортуємо необхідні модулі
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram import Dispatcher, Bot, types, executor
 import logging
 
-#створюємо і додаємо токен бота
+#6056717794:AAE8KjnkQXAQkDrXScqfUVX6Vmi4q1hP9mo
 BOT_TOKEN = Bot("6056717794:AAE8KjnkQXAQkDrXScqfUVX6Vmi4q1hP9mo")
 dp = Dispatcher(BOT_TOKEN)
-#всі повідомлення що несуть інформацію виводимуться в консоль
+
 logging.basicConfig(level=logging.INFO)
-#додаємо необхідні кнопки
+
 main_menu_buttons = [
     KeyboardButton('Обрати Тариф'),
     KeyboardButton('Створити свій тариф'),
-    KeyboardButton('Підтримка')
+    KeyboardButton('Підтримка'),
+    KeyboardButton('Розробники'),
+    KeyboardButton('Патріотики')
 ]
 
 tariff_buttons = [
@@ -46,27 +47,22 @@ family_buttons = [
     KeyboardButton('Смарт Сім\'я L'),
     KeyboardButton('Назад')
 ]
-#додаємо описи кожного з тарифів як словники
+
 tariff_descriptions = {
-    'Вільний Лайф': '\n180 грн на місяць\nБезлімітний інтернет\n1600 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери',
-    'Смарт Лайф': '\n120 грн на місяць\n25 ГБ інтернетy\n800 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери',
-    'Просто Лайф': '\n90 грн на місяць\n8 ГБ інтернетy\n300 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери',
-    'Platinum Лайф': '\n250 грн на місяць\nБезлімітний інтернет\n3000 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери',
-    'Шкільний Лайф': '\n150 грн на місяць\n7 ГБ інтернетy\nБезліміт на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери',
+    'Вільний Лайф': '\n180 грн на місяць\nБезлімітний інтернет\n1600 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери\n\nПереглянути/Придбати: [https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/vilniy-life-2021/]',
+    'Смарт Лайф': '\n120 грн на місяць\n25 ГБ інтернету\n800 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери\n\nПереглянути/Придбати: [https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/smart-life-2021/]',
+    'Просто Лайф': '\n90 грн на місяць\n8 ГБ інтернету\n300 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери\n\nПереглянути/Придбати: [https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/prosto-life-2021/]',
+    'Platinum Лайф': '\n250 грн на місяць\nБезлімітний інтернет\n3000 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери\n\nПереглянути/Придбати: [https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/platinum-life-2021/]',
+    'Шкільний Лайф': '\n150 грн на місяць\n7 ГБ інтернету\nБезліміт на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери\n\nПереглянути/Придбати: [https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/shkilniy/]',
+    'Ґаджет Безпека': '\n90 грн на місяць\n150 МБ інтернету/на день\n15 хв на всі номери по Україні (міські, мобільні, lifecell)\n\n\nПереглянути/Придбати: [https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/gadget-bezpeka/]',
+    'Ґаджет Смарт': '\n150 грн на місяць\n500 МБ інтернету/на день\n50 смс/на день\n50 хв на lifecell/день\n\nПереглянути/Придбати: [https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/gadget-smart21/]',
+    'Ґаджет Планшет': '\n275 грн на місяць\n50 ГБ інтернету\n0 хв на всі номери по Україні (міські, мобільні, lifecell)\n\nПереглянути/Придбати: [https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/gadget-smart21/]',
+    'Ґаджет Роутер': '\n375 грн на місяць\nБезлімітний інтернет\n0 хв на всі номери по Україні (міські, мобільні, lifecell)\n\nПереглянути/Придбати: [https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/gadget-rout21/]',
+    'Смарт Сім\'я S': '\n375 грн на місяць\n20 ГБ інтернету\n500 хв на інші номери по Україні (міські, мобільні, lifecell)\n500 SMS на мобільні номери по Україні\n\nПереглянути/Придбати: [https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/smart-family-s/]',
+    'Смарт Сім\'я M': '\n425 грн на місяць\n30 ГБ інтернету\n750 хв на інші номери по Україні (міські, мобільні, lifecell)\n1000 SMS на мобільні номери по Україні\n\Переглянути/Придбати: [https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/smart_simja-m/]',
+    'Смарт Сім\'я L': '\n500 грн на місяць\n50 ГБ інтернету\n1500 хв на інші номери по Україні (міські, мобільні, lifecell)\n1500 SMS на мобільні номери по Україні\n\nПереглянути/Придбати: [https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/smart-family-l/]',
 }
 
-gadjet_descriptions = {
-    'Ґаджет Безпека': '\n90 грн на місяць\n150 МБ інтернетy/на день\n15 хв на всі номери по Україні (міські, мобільні, lifecell)',
-    'Ґаджет Смарт': '\n150 грн на місяць\n500 МБ інтернетy/на день\n50 смс/на день\n50 хв на lifecell/день',
-    'Ґаджет Планшет': '\n275 грн на місяць\n50 ГБ інтернетy\n0 хв на всі номери по Україні (міські, мобільні, lifecell)',
-    'Ґаджет Роутер': '\n375 грн на місяць\nБезлімітний інтернет\n0 хв на всі номери по Україні (міські, мобільні, lifecell)',
-}
-
-family_descriptions = {
-    'Смарт Сім\'я S': '\n375 грн на місяць\n20 ГБ інтернетy\n500 хв на інші номери по Україні, безліміт на lifecell)\n500 SMS на мобільні номери по Україні',
-    'Смарт Сім\'я M': '\n425 грн на місяць\n30 ГБ інтернетy\n750 хв на інші номери по Україні, безліміт на lifecell)\n1000 SMS на мобільні номери по Україні',
-    'Смарт Сім\'я L': '\n500 грн на місяць\n50 ГБ інтернетy\n1500 хв на інші номери по Україні, безліміт на lifecell)\n1500 SMS на мобільні номери по Україні'
-}
 
 #усі функції з коммандами бота
 @dp.message_handler(commands=['start'])
@@ -83,11 +79,11 @@ async def start(message: types.Message):
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
     keyboard.add(*main_menu_buttons)
     await message.answer('Виберіть пункт:', reply_markup=keyboard)
-#функція взаємодії з користувачем
+
 @dp.message_handler(content_types=['text'])
 async def text(message: types.Message):
-    #скорочуємо функцію читання тексту від користувача
     msg = message.text
+
     if msg == 'Обрати Тариф':
         keyboard = ReplyKeyboardMarkup(resize_keyboard=True).add(*tariff_buttons)
         await message.answer('Виберіть тариф:', reply_markup=keyboard)
@@ -112,20 +108,25 @@ async def text(message: types.Message):
         keyboard = ReplyKeyboardMarkup(resize_keyboard=True).add(*gadjet_buttons)
         await message.answer('Виберіть тип тарифу:', reply_markup=keyboard)
 
-    elif msg in gadjet_descriptions.keys():
-        await message.answer(f'{msg}: {gadjet_descriptions.get(msg)}')
+    elif msg in tariff_descriptions.keys():
+        await message.answer(f'{msg}: {tariff_descriptions.get(msg)}')
 
     elif msg == 'Смарт Сім\'я':
         keyboard = ReplyKeyboardMarkup(resize_keyboard=True).add(*family_buttons)
         await message.answer('Виберіть тип тарифу:', reply_markup=keyboard)
 
-    elif msg in family_descriptions.keys():
-        await message.answer(f'{msg}: {family_descriptions.get(msg)}')
+    elif msg in tariff_descriptions.keys():
+        await message.answer(f'{msg}: {tariff_descriptions.get(msg)}')
 
     elif msg == 'Створити свій тариф':
         keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton('Перейти до конструктора', url='https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/handmade/'))
         await message.answer('Ось посилання на наш сайт де ви зможете зробити власний, унікальний тариф:', reply_markup=keyboard)
-        
+
+    elif msg == 'Патріотики':
+        url='https://www.youtube.com/watch?v=noAUBPrNBxY'
+        keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton('Відосик', url=url))
+        await message.answer('Відосик з низу:', reply_markup=keyboard)
+
     elif msg == 'Розробники':
         developers_info = """
         Розробники програми:
@@ -135,6 +136,7 @@ async def text(message: types.Message):
         - @raysist1
         """
         await message.answer(developers_info)
-#запуск роботи бота
+
+    
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
