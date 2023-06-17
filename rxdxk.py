@@ -128,15 +128,8 @@ async def text(message: types.Message):
         await message.answer('Відосик з низу:', reply_markup=keyboard)
 
     elif msg == 'Розробники':
-        developers_info = """
-        Розробники програми:
-        - @pristigio01m
-        - @xedercat
-        - @rxdxkk
-        - @raysist1
-        """
+        developers_info = "Розробники програми:\n- @pristigio01m\n- @xedercat\n- @rxdxkk\n- @raysist1"
         await message.answer(developers_info)
-
     
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
