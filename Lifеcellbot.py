@@ -17,8 +17,6 @@ main_menu_buttons = [
     KeyboardButton('Обрати Тариф'),
     KeyboardButton('Створити свій тариф'),
     KeyboardButton('Допомога'),
-    KeyboardButton('Розробники'),
-    Keyboardbutton('Патріотики')
 ]
 
 tariff_buttons = [
