@@ -72,22 +72,7 @@ async def text(message: types.Message):
         keyboard = ReplyKeyboardMarkup(resize_keyboard=True).add(*main_menu_buttons)
         await message.answer('Виберіть пункт:', reply_markup=keyboard)
 
-    elif msg == 'Патріотики':
-        url='https://www.youtube.com/watch?v=noAUBPrNBxY'
-        keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton('Відосик', url=url))
-        await message.answer('Відосик з низу:', reply_markup=keyboard)
-
-
-@dp.message_handler(lambda message: message.text == 'Розробники')
-async def handle_developers(message: types.Message):
-    developers_info = """
-    Розробники програми:
-    - @pristigio01m
-    - @xedercat
-    - @rxdxkk
-    - @raysist1
-    """
-    await message.answer(developers_info)
+   
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
