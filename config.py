@@ -1,12 +1,16 @@
-API_TOKEN = "6056717794:AAE8KjnkQXAQkDrXScqfUVX6Vmi4q1hP9mo"
 from keyboards import kb
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+API_TOKEN = os.environ.get('API_TOKEN')
 
 tariff = {
     '🤟Вільний Лайф': {
         'info': '\n180 грн на місяць\nБезлімітний інтернет\n1600 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери\n\n',
         'keyboard': InlineKeyboardMarkup().add(InlineKeyboardButton('Переглянути/Придбати', url='https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/vilniy-life-2021/')),
-        'internet': 'Безліміт',
+        'internet': 'Безліміт.',
         'calls':'1600 хв'
     },
     '✌️Смарт Лайф': {
@@ -24,7 +28,7 @@ tariff = {
     '🪙Platinum Лайф': {
         'info': '\n250 грн на місяць\nБезлімітний інтернет\n3000 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери\n\nПереглянути/Придбати:',
         'keyboard': InlineKeyboardMarkup().add(InlineKeyboardButton('Переглянути/Придбати', url='https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/platinum-life-2021/')),
-        'internet': 'Безліміт',
+        'internet': 'Безліміт.',
         'calls':'3000 хв'
     },
     '🏫Шкільний Лайф': {
@@ -54,7 +58,7 @@ tariff = {
     '🌐Ґаджет Роутер': {
         'info':  '\n375 грн на місяць\nБезлімітний інтернет\n0 хв на всі номери по Україні (міські, мобільні, lifecell)\n\nПереглянути/Придбати:',
         'keyboard': InlineKeyboardMarkup().add(InlineKeyboardButton('Переглянути/Придбати', url='https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/gadget-rout21/')),
-        'internet': 'Безліміт',
+        'internet': 'Безліміт.',
         'calls': '0 хв'
     },
     '👫Смарт Сім\'я S': {
@@ -99,7 +103,7 @@ tariff = {
         'info': "Розробники програми:\n- @pristigio01m\n- @xedercat\n- @rxdxkk\n- @raysist1"
     },
     '🔍Підібрати тариф': {
-        'info': 'Звісно! Я допоможу вам підібрати тариф. Для кого ви вибираєте тариф?',
+        'info': 'Я допоможу вам підібрати тариф. Що ви хочете у тарифі?',
         'keyboard': kb.internet_calls_kb
     },
     'Інтернет': {

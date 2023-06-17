@@ -62,12 +62,12 @@ internet_buttons = [
     KeyboardButton('8 ГБ'),
     KeyboardButton('25 ГБ'),
     KeyboardButton('50 ГБ'),
-    KeyboardButton('Безліміт'),
+    KeyboardButton('Безліміт.'),
     KeyboardButton('🔙Назад')
 ]
 internet_kb = ReplyKeyboardMarkup(resize_keyboard=True).add(*internet_buttons)
 
-internet = [ '150 МБ/день', '500 МБ/день', '7 ГБ', '8 ГБ', '25 ГБ', '50 ГБ', 'Безліміт' ]
+internet = [ '150 МБ/день', '500 МБ/день', '7 ГБ', '8 ГБ', '25 ГБ', '50 ГБ', 'Безліміт.' ]
 
 calls_buttons = [
     KeyboardButton('0 хв'),
