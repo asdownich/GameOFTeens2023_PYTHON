@@ -17,6 +17,7 @@ main_menu_buttons = [
     KeyboardButton('Обрати Тариф'),
     KeyboardButton('Створити свій тариф'),
     KeyboardButton('Допомога')
+    KeyboardButton('Розробники')
 ]
 
 tariff_buttons = [
@@ -69,6 +70,17 @@ async def text(message: types.Message):
     elif msg == 'Назад':
         keyboard = ReplyKeyboardMarkup(resize_keyboard=True).add(*main_menu_buttons)
         await message.answer('Виберіть пункт:', reply_markup=keyboard)
+
+@dp.message_handler(lambda message: message.text == 'Розробники')
+async def handle_developers(message: types.Message):
+    developers_info = """
+    Розробники програми:
+    - @pristigio01m
+    - @xedercat
+    - @rxdxkk
+    - @raysist1
+    """
+    await message.answer(developers_info)
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
