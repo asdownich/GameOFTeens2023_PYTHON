@@ -38,6 +38,14 @@ tariff_descriptions = {
     'Шкільний Лайф': '\n150 грн на місяць\n7 ГБ інтернетy\nБезліміт на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери',
 }
 
+gadjet_descriptions = {
+    'Ґаджет Безпека(Для датчиків руху та GPS/GSM-сигналізації)': '\n90 грн на місяць\n150 МБ інтернетy/на день\n15 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери',
+    'Ґаджет Смарт(Для смарт-годинників)': '\n150 грн на місяць\n500 МБ інтернетy/на день\n50 смс/на день\n50 хв на lifecell/день\nБезліміт на lifecell після використання хвилин на всі номери',
+    'Ґаджет Планшет(Для планшетів)': '\n275 грн на місяць\n50 ГБ інтернетy\n0 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери',
+    'Ґаджет Роутер(Для модемів та маршрутизаторів (роутерів))': '\n375 грн на місяць\nБезлімітний інтернет\n0 хв на всі номери по Україні (міські, мобільні, lifecell)\nБезліміт на lifecell після використання хвилин на всі номери',
+} 
+
+
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
@@ -67,6 +75,18 @@ async def text(message: types.Message):
     elif msg == 'Назад':
         keyboard = ReplyKeyboardMarkup(resize_keyboard=True).add(*main_menu_buttons)
         await message.answer('Виберіть пункт:', reply_markup=keyboard)
+#gadjet_types
+@dp.message_handler(text='Ґаджет')
+async def gadjet_types(message: types.Message):
+    keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.add(*gadjet_buttons)
+    await message.answer('Виберіть тип тарифу:', reply_markup=keyboard)
+
+@dp.message_handler(text=[gadjet for gadjet in gadjet_descriptions.keys()])
+async def gadjet_description(message: types.Message):
+    gadjet = message.text
+    description = gadjet_descriptions.get(gadjet)
+    await message.answer(f'{gadjet}: {description}')
 
    
 
