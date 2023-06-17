@@ -3,6 +3,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMar
 # створюємо кнопки головного меню 
 main_menu_buttons = [
     KeyboardButton('🤔Обрати Тариф'),
+    KeyboardButton('🔍Підібрати тариф'),
     KeyboardButton('⚙️Створити свій тариф'),
     KeyboardButton('👩‍💻Підтримка'),
     KeyboardButton('🧑‍💻Розробники'),
@@ -46,3 +47,41 @@ family_kb = ReplyKeyboardMarkup(resize_keyboard=True).add(*family_buttons)
 help_kb = InlineKeyboardMarkup().add(InlineKeyboardButton('Перейти до підтримки', url='https://www.lifecell.ua/uk/pidtrimka/'))
 create_kb = InlineKeyboardMarkup().add(InlineKeyboardButton('Перейти до конструктора', url='https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/handmade/'))
 video_kb = InlineKeyboardMarkup().add(InlineKeyboardButton('Відосик', url='https://www.youtube.com/watch?v=noAUBPrNBxY'))
+
+internet_calls_buttons = [
+    KeyboardButton('Інтернет'),
+    KeyboardButton('Хв на дзвінки')
+]
+internet_calls_kb = ReplyKeyboardMarkup(resize_keyboard=True).add(*internet_calls_buttons)
+
+internet_buttons = [
+    KeyboardButton('150 МБ/день'),
+    KeyboardButton('500 МБ/день'),
+    KeyboardButton('7 ГБ'),
+    KeyboardButton('8 ГБ'),
+    KeyboardButton('25 ГБ'),
+    KeyboardButton('50 ГБ'),
+    KeyboardButton('Безліміт'),
+    KeyboardButton('🔙Назад')
+]
+internet_kb = ReplyKeyboardMarkup(resize_keyboard=True).add(*internet_buttons)
+
+internet = [ '150 МБ/день', '500 МБ/день', '7 ГБ', '8 ГБ', '25 ГБ', '50 ГБ', 'Безліміт' ]
+
+calls_buttons = [
+    KeyboardButton('0 хв'),
+    KeyboardButton('15 хв'),
+    KeyboardButton('50 хв/день'),
+    KeyboardButton('300 хв'),
+    KeyboardButton('500 хв'),
+    KeyboardButton('750 хв'),
+    KeyboardButton('800 хв'),
+    KeyboardButton('1500 хв'),
+    KeyboardButton('1600 хв'),
+    KeyboardButton('3000 хв'),
+    KeyboardButton('Безліміт'),
+    KeyboardButton('🔙Назад')
+]
+calls_kb = ReplyKeyboardMarkup(resize_keyboard=True).add(*calls_buttons)
+
+calls = [ '0 хв', '15 хв', '50 хв/день', '300 хв', '500 хв', '750 хв', '800 хв', '1500 хв', '1600 хв', '3000 хв', 'Безліміт' ]
