@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 main_menu_buttons = [
     KeyboardButton('Обрати Тариф'),
     KeyboardButton('Створити свій тариф'),
-    KeyboardButton('Допомога'),
+    KeyboardButton('Допомога')
 ]
 
 tariff_buttons = [
