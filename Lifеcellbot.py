@@ -73,7 +73,7 @@ family_descriptions = {
 #bot commands
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
-    user_tag = f"<b>{message.from_user.username}</b>"
+    user_tag = f"<b>{message.from_user.full_name}</b>"
     await message.answer(f"Привіт, {user_tag}! Я бот від Lifеcellbot тут ви можете оплатити тариф і тд ",
                          parse_mode='HTML')
 
@@ -122,5 +122,6 @@ async def text(message: types.Message):
     elif msg == 'Створити свій тариф':
         keyboard = InlineKeyboardMarkup().add(InlineKeyboardButton('Перейти до конструктора', url='https://www.lifecell.ua/uk/mobilnij-zvyazok/taryfy/handmade/'))
         await message.answer('Ось посилання на наш сайт де ви зможете зробити власний, унікальний тариф:', reply_markup=keyboard)
+    
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
